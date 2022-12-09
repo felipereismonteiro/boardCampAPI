@@ -5,6 +5,7 @@ export default async function customersController(req, res) {
         const cpf = req.query.cpf;
         if (cpf) {
             const customers = await connectionDB.query(`SELECT * FROM customers WHERE cpf LIKE ( $1||'%')`, [cpf]);
+            console.log("entrou aqui");
             return res.send(customers.rows);
         };  
         const customers = await connectionDB.query(`SELECT * FROM customers`);
