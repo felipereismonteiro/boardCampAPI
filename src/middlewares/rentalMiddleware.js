@@ -1,7 +1,7 @@
 import { connectionDB } from "../database/db.js";
 import { rentalSchema } from "../models/rentalSchema.js"
 
-export default async function rentalMiddleware(req, res, next) {
+export async function rentalMiddleware(req, res, next) {
     try {
         const body = req.body;
         const {customerId, gameId, daysRented} = await rentalSchema.validateAsync(body, {abortEarly: false});
@@ -36,5 +36,21 @@ export default async function rentalMiddleware(req, res, next) {
     } catch (err) {
         console.log(err);
         res.send(err.details.map(d => d.message));
+    }
+}
+
+export async function rentalDeleteMiddleware(req, res, next) {
+    try {
+        const { id } = req.params;
+        const existingId = await connectionDB.query(`SELECT * FROM rentals WHERE id=$1`, [id])
+        
+        if (existingId.rows.length === 0 || existingId.rows[0].returnDate !== null) {
+            return res.sendStatus(400);
+        }
+        req.id = id;
+        next();
+    } catch(err) {
+        console.log(err);
+        res.send(err.message);
     }
 }
