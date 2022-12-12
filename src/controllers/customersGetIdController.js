@@ -9,7 +9,7 @@ export default async function customersGetId(req, res) {
         return res.sendStatus(404);
     }
 
-    res.send(customer.rows);
+    res.send(customer.rows[0]);
   } catch (err) {
     res.status(400).send(err.message);
   }
