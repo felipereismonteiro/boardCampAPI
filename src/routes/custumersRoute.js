@@ -1,11 +1,9 @@
 import { Router } from "express";
+import { customersPostController, customersPutController } from "../controllers/customersPostController.js";
+import { customersMiddleware, customersPutMiddleware} from "../middlewares/customersMiddleware.js";
 import customersGetController from "../controllers/customersGetController.js";
 import customersGetIdController from "../controllers/customersGetIdController.js";
-import {
-  customersPostController,
-  customersPutController,
-} from "../controllers/customersPostController.js";
-import { customersMiddleware, customersPutMiddleware} from "../middlewares/customersMiddleware.js";
+
 
 export const customersRoute = Router();
 
