@@ -9,6 +9,5 @@ export const rentalsRoute = Router();
 
 rentalsRoute.get("/rentals", rentalsGetController);
 rentalsRoute.post("/rentals", rentalMiddleware, rentalsPostController);
-
 rentalsRoute.post("/rentals/:id/return", rentalReturnMiddleware, rentalReturnController);
 rentalsRoute.delete("/rentals/:id", rentalDeleteMiddleware, rentalsdDeleteController);

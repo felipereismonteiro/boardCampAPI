@@ -15,7 +15,7 @@ export default async function gameMiddleware(req, res, next) {
         }
 
         req.validate = validate;
-
+        console.log(validate);
         next();
     } catch(err) {
         res.send(err.details.map(d => d.message));
